@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  award: MyString
+  medals: MyString
+  sport: one
+  user: one
+
+two:
+  award: MyString
+  medals: MyString
+  sport: two
+  user: two
