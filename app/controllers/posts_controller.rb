@@ -53,7 +53,13 @@ class PostsController < ApplicationController
     render_success 200, true, 'Post deleted successfully', {}
   end
   private
-
+  def set_sport
+    @sport = Sport.where(id: params[:sport_id]).first
+    
+      unless @sport
+          return return_error 404, false, 'Product not found', {}
+      end
+  end
   # Params of Post
   def post_params
     params.require(:post).permit(:title,:description,:image,:sport_id,:user_id)

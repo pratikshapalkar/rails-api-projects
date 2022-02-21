@@ -1,21 +1,10 @@
 class RegistrationsController < DeviseTokenAuth::RegistrationsController
-  # before_action :find_user, except: %i[create index]
-  before_action :authenticate_user, only: [:create, :show, :update]
   
-   # GET /resource/sign_up
-  def new
-    build_resource({})
-    set_minimum_password_length
-    yield resource if block_given?
-    respond_with self.resource
-  end
-
-  def create!
-    user = User.new(user_params)
-
+  # GET /resource/sign_up
+  def create
+    user = User.new(sign_up_params)
     if user.save 
-      token = user.generate_jwt
-      render json: token.to_json
+      render json: user.as_json, status: :ok, message:'User created successfully'
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
     end
@@ -26,13 +15,13 @@ class RegistrationsController < DeviseTokenAuth::RegistrationsController
   rescue ActiveRecord::RecordNotFound
     render json: {}, status: :not_found
   end
-end
+
   private
 
-  
-
-  def user_params
-    params.permit(:name, :email,:gender,:city,:state,:country)
+  def sign_up_params
+    params.require(:user).permit(:email,:password,:password_confirmation,:uid,:provider,:name)
   end
+  #if we specify sign_up params by this we need to add parameters in postman like user[name] this way
+end
 
 
