@@ -5,7 +5,7 @@ class AnouncementsController < ApplicationController
 
   ## List All Announcement API
   def index
-    anouncements = @sport.anouncements
+    anouncements = @sport.anouncements.page(params[:page]).per(per_page)
 
     render_success 200, true, 'Announcement fetched successfully', anouncements.as_json
   end

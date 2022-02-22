@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
 
   ## Callbacks
-  # before_action :validate_app_version
+  before_action :validate_app_version
 
   ## Custom Authentication Error Message
   def render_authenticate_error
