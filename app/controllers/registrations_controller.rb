@@ -4,18 +4,12 @@ class RegistrationsController < DeviseTokenAuth::RegistrationsController
   def create
     user = User.new(sign_up_params)
     if user.save 
-      render json: user.as_json, status: :ok, message:'User created successfully'
+      render_success 200, true, 'User created successfully',user.as_json
     else
-      render json: { errors: user.errors.full_messages }, status: :bad_request
+      return_error 500, false, errors, {}
     end
   end
-
-  def show
-    render json: User.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: {}, status: :not_found
-  end
-
+  
   private
 
   # parameters for sign up
