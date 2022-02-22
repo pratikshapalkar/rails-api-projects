@@ -5,8 +5,8 @@ class AchievementsController < ApplicationController
 
    ## List All Announcement API
    def index
-    achievements = @sport.achievements
-
+    achievements = @sport.achievements.page(params[:page]).per(per_page)
+  
     render_success 200, true, 'Achievements fetched successfully', achievements.as_json
   end
 

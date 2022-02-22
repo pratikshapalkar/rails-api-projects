@@ -4,7 +4,7 @@ class SportsController < ApplicationController
 
   # GET /sports
   def index
-    @sports = Sport.all
+    @sports = Sport.page(params[:page]).per(per_page)
 
     render_success 200, true, 'Sports fetched successfully', @sports.as_json
   end

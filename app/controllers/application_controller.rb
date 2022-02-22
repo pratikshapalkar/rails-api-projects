@@ -24,7 +24,8 @@ class ApplicationController < ActionController::API
       code: code,
       status: status,
       message: message,
-      data: data
+      data: data,
+      per_page: per_page
   }
   end
     
@@ -45,15 +46,15 @@ class ApplicationController < ActionController::API
     end
   end
     
-  # ## Pagination Page Number
-  # def page
-  #   @page ||= params[:page] || 1
-  # end
+  ## Pagination Page Number
+  def page
+    @page ||= params[:page] || 1
+  end
     
-  # ## Pagination Per Page Records
-  # def per_page
-  #   @per_page ||= params[:per_page] || 20
-  # end
+  ## Pagination Per Page Records
+  def per_page
+    @per_page ||= params[:per_page] || 20
+  end
     
       ## Set Product & Return ERROR if not found
   def set_sport

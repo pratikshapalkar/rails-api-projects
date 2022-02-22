@@ -66,15 +66,6 @@ class AnouncementsController < ApplicationController
     params.require(:anouncement).permit(:description, :sport_id)
   end
 
-  ## Set Language Object, Return Error if not found
-  # def set_post
-  #   @sport = @sport.posts.where(id: params[:post_id]).first
-
-  #   unless @sport
-  #     return return_error 404, false, 'Sport not found', {}
-  #   end
-  # end
-
   ## Set Announcement Object, Return Error if not found
   def set_announcement
     @anouncement = @sport.anouncements.where(id: params[:id]).first
