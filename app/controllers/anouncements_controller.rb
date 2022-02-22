@@ -3,8 +3,8 @@ class AnouncementsController < ApplicationController
   before_action :set_sport
   before_action :set_announcement, only: [:update, :show, :destroy]
 
-   ## List All Announcement API
-   def index
+  ## List All Announcement API
+  def index
     anouncements = @sport.anouncements
 
     render_success 200, true, 'Announcement fetched successfully', anouncements.as_json
@@ -30,7 +30,7 @@ class AnouncementsController < ApplicationController
 
   ## Update a Announcement API
   def update
-    if @anouncement.update(anouncements_params)
+    if @anouncement.update(anouncements_params) && current_user.admin?
       render_success 200, true, 'Announcement updated successfully', @anouncement.as_json
     else
       if @anouncement.errors

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   
   # This action fetch all the posts of sport
   def index
-    posts = @sport.posts
+    posts = @sport.posts.page(params[:page]).per(per_page)
 
     render_success 200, true, 'Posts fetched successfully', posts.as_json
   end
