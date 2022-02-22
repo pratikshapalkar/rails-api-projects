@@ -16,7 +16,6 @@ class ApplicationController < ActionController::API
       return_error 500, false, errors, {}
     end
   end
-  
   protected
   
   ## Return Success Response

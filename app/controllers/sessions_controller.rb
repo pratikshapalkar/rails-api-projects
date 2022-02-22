@@ -29,21 +29,24 @@ class SessionsController < DeviseTokenAuth::SessionsController
     end
   end
 
+  def destroy
+    super
+  end
   protected
 
     ## Manage Strong Params
-    def sign_up_params
-      parameters = params.permit(:facebook_id,:email)
+  def sign_up_params
+    parameters = params.permit(:facebook_id,:email)
 
-      parameters
-    end
+    parameters
+  end
 
-    ## Render Email not exists in params error
-    def render_email_missing
-      return_error 400, false, 'Please enter email address', {}
-    end
+  ## Render Email not exists in params error
+  def render_email_missing
+    return_error 400, false, 'Please enter email address', {}
+  end
 
-    def col_value(col_name)
-      params.has_key?(col_name) ? params[col_name] : ''
-    end
+  def col_value(col_name)
+    params.has_key?(col_name) ? params[col_name] : ''
+  end
 end

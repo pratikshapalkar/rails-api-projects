@@ -5,11 +5,9 @@ class PostsController < ApplicationController
   
   # This action fetch all the posts of sport
   def index
-    if current_user.id && current_user.admin?
     posts = @sport.posts
 
     render_success 200, true, 'Posts fetched successfully', posts.as_json
-    end
   end
 
   # this action lets us create a new post
@@ -55,7 +53,7 @@ class PostsController < ApplicationController
 
     render_success 200, true, 'Post deleted successfully', {}
   end
-  
+
   private
 
   def set_sport

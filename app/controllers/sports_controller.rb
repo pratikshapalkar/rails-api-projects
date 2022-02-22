@@ -36,8 +36,10 @@ class SportsController < ApplicationController
     if @sport.update(sport_params) && current_user.admin?
       render_success 200, true, 'Sport update successfully', @sport.as_json
     else
-      return_error 500, false, errors, {}
+      errors = 'Sport updation failed'
     end
+      
+    return_error 500, false, errors, {} 
   end
 
   # DELETE /sports/1
