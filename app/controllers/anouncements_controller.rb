@@ -1,7 +1,6 @@
 class AnouncementsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_sport
-  # before_action :set_post
   before_action :set_announcement, only: [:update, :show, :destroy]
 
    ## List All Announcement API
@@ -16,7 +15,7 @@ class AnouncementsController < ApplicationController
     anouncement = @sport.anouncements.new(anouncements_params)
     anouncement.sport_id = @sport.id
 
-    if anouncement.save
+    if anouncement.save && current_user.admin?
       render_success 200, true, 'Announcement created successfully', anouncement.as_json
     else
       if anouncement.errors
@@ -25,7 +24,7 @@ class AnouncementsController < ApplicationController
         errors = 'Announcement creation failed'
       end
 
-      return_error 500, false, errors, {}
+      return_error 500, false,'Only admin can create announcements'
     end
   end
 
@@ -51,9 +50,13 @@ class AnouncementsController < ApplicationController
 
   ## Delete a Announcement API
   def destroy
+    if current_user.admin?
     @anouncement.destroy
 
     render_success 200, true, 'Announcement deleted successfully', {}
+    else
+      return_error 500, false,'Only admin can delete announcements'
+    end
   end
 
   private
@@ -73,7 +76,7 @@ class AnouncementsController < ApplicationController
   # end
 
   ## Set Announcement Object, Return Error if not found
-  def set_category
+  def set_announcement
     @anouncement = @sport.anouncements.where(id: params[:id]).first
 
     unless @anouncement
