@@ -17,7 +17,7 @@ class SportsController < ApplicationController
   def create
     @sport = Sport.new(sport_params)
 
-    if @sport.save
+    if @sport.save && current_user.admin?
       render json: @sport, status: :created, location: @sport  
     else
        render json: @sport.errors, status: :unprocessable_entity
@@ -26,7 +26,7 @@ class SportsController < ApplicationController
 
   # PATCH/PUT /sports/1
   def update
-    if @sport.update(sport_params)
+    if @sport.update(sport_params) && current_user.admin?
       render json: @sport
     else
       render json: @sport.errors, status: :unprocessable_entity
@@ -35,7 +35,8 @@ class SportsController < ApplicationController
 
   # DELETE /sports/1
   def destroy
-    @sport.destroy
+    @sport.destroy && current_user.admin?
+    render json: @sport.as_json, status: :ok, message:'Sport deleted successfully'
   end
 
   private

@@ -12,7 +12,6 @@ class Post < ApplicationRecord
   #Associations
   belongs_to :sport
   belongs_to :user
-  has_many :anouncements
   # validations
   validates :title, :description, presence: true
 end

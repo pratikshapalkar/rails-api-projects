@@ -32,7 +32,8 @@ class User < ActiveRecord::Base
 
   # allows to reference the user roles with strings, but store them in the database as integers.
   enum role: [:user, :admin]
-
+  # associations
+  has_many :achievements, dependent: :destroy
   # validations
-  validates :name, uniqueness: { case_sensitive: false }, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9]+\z/ }  
+  validates :email, uniqueness: { case_sensitive: false }, presence: true
 end

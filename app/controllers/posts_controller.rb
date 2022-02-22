@@ -5,8 +5,11 @@ class PostsController < ApplicationController
   
   # This action fetch all the posts of sport
   def index
+    if current_user.id && current_user.admin?
     posts = @sport.posts
-    render_success 200, true, 'Posts fetched successfully', sports.as_json
+
+    render_success 200, true, 'Posts fetched successfully', posts.as_json
+    end
   end
 
   # this action lets us create a new post

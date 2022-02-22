@@ -12,5 +12,5 @@ class Achievement < ApplicationRecord
   belongs_to :sport
   belongs_to :user
   # validations
-  validates :award, :medal, presence: true
+  validates :award, :medals, presence: true
 end

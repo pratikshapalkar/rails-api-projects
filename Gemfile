@@ -44,6 +44,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# devise token authentication
 gem 'devise_token_auth'
+# devise 
 gem 'devise'
+# debugging
 gem 'pry', '~> 0.13.1'
+# for pagination
+gem 'kaminari'

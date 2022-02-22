@@ -1,5 +1,6 @@
 class SessionsController < DeviseTokenAuth::SessionsController   
-
+  
+  # for token creation
   def create
     params_hash = sign_up_params
 
@@ -13,7 +14,7 @@ class SessionsController < DeviseTokenAuth::SessionsController
             email: col_value('email'),
             phone: col_value('phone'),
             password: SecureRandom.hex(8),
-            sport_id: col_value('sport_id'),
+            # sport_id: col_value('sport_id'),
             confirmed_at: Time.now
         }
 
