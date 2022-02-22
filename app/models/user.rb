@@ -29,11 +29,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
-
-  # allows to reference the user roles with strings, but store them in the database as integers.
-  enum role: [:user, :admin]
   # associations
   has_many :achievements, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  # allows to reference the user roles with strings, but store them in the database as integers.
+  enum role: [:user, :admin]
   # validations
   validates :email, uniqueness: { case_sensitive: false }, presence: true
 end

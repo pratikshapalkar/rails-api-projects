@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2022_02_21_172331) do
 
   create_table "sports", force: :cascade do |t|
     t.string "name"
-    t.integer "no_of_player"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

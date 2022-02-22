@@ -8,16 +8,16 @@ class ApplicationController < ActionController::API
   def render_authenticate_error
         return_error 401, false, 'You need to sign in or sign up before continuing.', {}
   end
-    
-  protected
-
-  def authenticate_user!(options = {})
-    head :unauthorized unless signed_in?
+  
+  def authenticate_user
+    if current_user
+       render_success 200, true, 'Authenticated successfully'
+    else
+      return_error 500, false, errors, {}
+    end
   end
-
-  def authenticate_current_user
-    head :unauthorized if current_user_get.nil?
-  end  
+  
+  protected
   
   ## Return Success Response
   def render_success code, status, message, data = {}
@@ -46,15 +46,15 @@ class ApplicationController < ActionController::API
     end
   end
     
-  ## Pagination Page Number
-  def page
-    @page ||= params[:page] || 1
-  end
+  # ## Pagination Page Number
+  # def page
+  #   @page ||= params[:page] || 1
+  # end
     
-  ## Pagination Per Page Records
-  def per_page
-    @per_page ||= params[:per_page] || 20
-  end
+  # ## Pagination Per Page Records
+  # def per_page
+  #   @per_page ||= params[:per_page] || 20
+  # end
     
       ## Set Product & Return ERROR if not found
   def set_sport

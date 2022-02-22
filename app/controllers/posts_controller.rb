@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_sport
   before_action :set_post, only: [:update, :show, :destroy]
   
@@ -55,7 +55,9 @@ class PostsController < ApplicationController
 
     render_success 200, true, 'Post deleted successfully', {}
   end
+  
   private
+
   def set_sport
     @sport = Sport.where(id: params[:sport_id]).first
     
@@ -67,7 +69,6 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title,:description,:image,:sport_id,:user_id)
   end
-
 
   ## Set post Object, Return Error if not found
   def set_post

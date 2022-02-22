@@ -1,7 +1,6 @@
 # --Schema information--
 # Table name = sports
 # name         :string
-# no_of_player :string
 # created_at   :datetime, null: false
 # updated_at   :datetime, null: false
 # 
@@ -12,5 +11,5 @@ class Sport < ApplicationRecord
   has_many :anouncements, dependent: :destroy
   has_many :achievements, dependent: :destroy
   # validations
-  validates :name, :no_of_player, presence: true
+  validates :name, presence: true
 end
