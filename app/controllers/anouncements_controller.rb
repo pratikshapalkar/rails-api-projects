@@ -3,14 +3,14 @@ class AnouncementsController < ApplicationController
   before_action :set_sport
   before_action :set_announcement, only: [:update, :show, :destroy]
 
-  ## List All Announcement API
+  ## GET /sports/:sport_id/anouncements
   def index
     anouncements = @sport.anouncements.page(params[:page]).per(per_page)
 
     render_success 200, true, 'Announcement fetched successfully', anouncements.as_json
   end
 
-  ## Create a Announcement API
+  ## POST /sports/:sport_id/anouncements
   def create
     anouncement = @sport.anouncements.new(anouncements_params)
     anouncement.sport_id = @sport.id
@@ -28,7 +28,7 @@ class AnouncementsController < ApplicationController
     end
   end
 
-  ## Update a Announcement API
+  ## PATCH /sports/:sport_id/anouncements/:id
   def update
     if @anouncement.update(anouncements_params) && current_user.admin?
       render_success 200, true, 'Announcement updated successfully', @anouncement.as_json
@@ -43,12 +43,12 @@ class AnouncementsController < ApplicationController
     end
   end
 
-  ## Fetch a Announcement API
+  ## GET /sports/:sport_id/anouncements/:id
   def show
     render_success 200, true, 'Announcement fetched successfully', @anouncement.as_json
   end
 
-  ## Delete a Announcement API
+  ## DELETE /sports/:sport_id/anouncements/:id
   def destroy
     if current_user.admin?
     @anouncement.destroy

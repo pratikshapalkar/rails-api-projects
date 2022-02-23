@@ -3,14 +3,14 @@ class PostsController < ApplicationController
   before_action :set_sport
   before_action :set_post, only: [:update, :show, :destroy]
   
-  # This action fetch all the posts of sport
+  # GET /sports/:sport_id/posts
   def index
     posts = @sport.posts.page(params[:page]).per(per_page)
 
     render_success 200, true, 'Posts fetched successfully', posts.as_json
   end
 
-  # this action lets us create a new post
+  # POST /sports/:sport_id/posts
   def create
     post = @sport.posts.new(post_params)
 
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # Update post API
+  # PATCH /sports/:sport_id/posts/:id
   def update
     if @post.update(post_params)
       render_success 200, true, 'Post updated successfully', @post.as_json
@@ -42,12 +42,12 @@ class PostsController < ApplicationController
     end
   end
 
-  # Fetch an post API
+  # GET /sports/:sport_id/posts/:id
   def show
     render_success 200, true, 'Post fetched successfully', @post.as_json
   end
 
-  # Delete an post API
+  # DELETE /sports/:sport_id/posts/:id
   def destroy
     @post.destroy
 

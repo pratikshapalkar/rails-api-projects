@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
 
+  ## Application Configs
+  rescue_from Exception, with: :exception_handling
+
   ## Callbacks
   before_action :validate_app_version
 
@@ -37,6 +40,11 @@ class ApplicationController < ActionController::API
       message: message,
       data: data
   }
+  end
+  ## Exception Handling Block
+  def exception_handling(e)
+    logger.error "Exception Handling: #{e}"
+    return_error 500, false, e.message, {}
   end
 
   ## Check for Latest App Version

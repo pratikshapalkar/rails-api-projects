@@ -53,4 +53,4 @@ gem 'pry', '~> 0.13.1'
 # for pagination
 gem 'kaminari'
 # serializer for associations
-gem 'active_model_serializers', '~> 0.10.13'
+# gem 'active_model_serializers', '~> 0.10.13'

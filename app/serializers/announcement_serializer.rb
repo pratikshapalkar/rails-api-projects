@@ -1,3 +1,4 @@
-class AnnouncementSerializer < ActiveModel::Serializer
-  attributes :id
-end
+# class AnnouncementSerializer < ActiveModel::Serializer
+#   attributes :id,:description
+#   belongs_to :sport
+# end
