@@ -4,7 +4,7 @@ class AchievementsController < ApplicationController
   before_action :set_achievement, only: [:update, :show, :destroy]
 
    ## List All Announcement API
-   def index
+  def index
     achievements = @sport.achievements.page(params[:page]).per(per_page)
   
     render_success 200, true, 'Achievements fetched successfully', achievements.as_json

@@ -64,7 +64,7 @@ class ApplicationController < ActionController::API
     @per_page ||= params[:per_page] || 2
   end
     
-      ## Set Product & Return ERROR if not found
+  ## Set Product & Return ERROR if not found
   def set_sport
     @sport = Sport.where(id: params[:sport_id]).first
     
